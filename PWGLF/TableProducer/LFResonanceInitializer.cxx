@@ -325,19 +325,19 @@ struct reso2initializer {
     switch (multEstimator) {
       case 0:
         returnValue = ResoEvents.centFT0M();
-	break;
+        break;
       case 1:
         returnValue = ResoEvents.centFT0C();
-	break;
+        break;
       case 2:
         returnValue = ResoEvents.centFT0A();
-	break;
+        break;
       case 99:
         returnValue = ResoEvents.centFV0A();
-	break;
+        break;
       default:
         returnValue = ResoEvents.centFT0M();
-	break;
+        break;
     }
     return returnValue;
   }
@@ -350,19 +350,19 @@ struct reso2initializer {
     switch (multEstimator) {
       case 0:
         returnValue = ResoEvents.multFT0M();
-	break;
+        break;
       case 1:
         returnValue = ResoEvents.multFT0C();
-	break;
+        break;
       case 2:
         returnValue = ResoEvents.multFT0A();
-	break;
+        break;
       case 99:
         returnValue = ResoEvents.multFV0A();
-	break;
+        break;
       default:
         returnValue = ResoEvents.multFT0M();
-	break;
+        break;
     }
     return returnValue;
   }
