@@ -76,7 +76,7 @@ struct reso2dfmerged {
   Produces<aod::ResoTrackDFs> reso2trksdf;
   int df = 0;
 
-  std::vector<std::tuple<resoCols::iterator, float, float, float, float,float,float, resoTracks>> vecOfTuples;
+  std::vector<std::tuple<resoCols::iterator, float, float, float, float, float, float, resoTracks>> vecOfTuples;
   std::vector<std::vector<std::tuple<float, float, float, float,
                                      float, float, signed char, unsigned char,
                                      float, float, float, float,
@@ -89,7 +89,7 @@ struct reso2dfmerged {
   {
 
     int nCollisions = nDF;
-    vecOfTuples.push_back(std::make_tuple(collision, collision.posX(), collision.posY(), collision.posZ(), collision.cent(),collision.spherocity(),collision.evtPl(), tracks));
+    vecOfTuples.push_back(std::make_tuple(collision, collision.posX(), collision.posY(), collision.posZ(), collision.cent(), collision.spherocity(), collision.evtPl(), tracks));
     std::vector<std::tuple<float, float, float, float,
                            float, float, signed char, unsigned char,
                            float, float, float, float,
