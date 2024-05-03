@@ -65,7 +65,7 @@ struct lambdaAnalysis_pb {
   Configurable<bool> cUseOnlyTOFTrackKa{"cUseOnlyTOFTrackKa", false, "Use only TOF track for PID selection"}; // Use only TOF track for Kaon PID selection
   Configurable<bool> cUseTpcOnly{"cUseTpcOnly", false, "Use TPC Only selection"};                             // TPC And TOF tracks
   Configurable<float> cRejNsigmaTpc{"cRejNsigmaTpc", 3.0, "Reject tracks to improve purity of TPC PID"};      // Reject missidentified particles when tpc bands merge
-  Configurable<float> cRejNsigmaTpcVeto{"cRejNsigmaTpcVeto", 3.0, "Reject tracks to improve purity of TPC PID"};      // Reject missidentified particles when tpc bands merge
+  Configurable<float> cRejNsigmaTpcVeto{"cRejNsigmaTpcVeto", 3.0, "Reject tracks to improve purity of TPC PID"}; // Reject missidentified particles when tpc bands merge
   Configurable<float> cRejNsigmaTof{"cRejNsigmaTof", 3.0, "Reject tracks to improve purity of TOF PID"};      // Reject missidentified particles when tpc bands merge
   // Proton
   Configurable<double> cMaxTPCnSigmaProton{"cMaxTPCnSigmaProton", 3.0, "TPC nSigma cut for Proton"}; // TPC
@@ -239,15 +239,15 @@ struct lambdaAnalysis_pb {
     if (!cUseTpcOnly && candidate.hasTOF()) {
       if (nsigmaCutCombinedProton < 0 && p >= cPMin) {
         for (int i = 0; i < nitrtof - 1; ++i) {
-          if (p >= tofPIDp[i] && p < tofPIDp[i + 1] && (tofNsigmaPr < tofPIDcut[i] && tofNsigmaPi > cRejNsigmaTof && tofNsigmaKa > cRejNsigmaTof  && tofNsigmaEl > cRejNsigmaTof))
+          if (p >= tofPIDp[i] && p < tofPIDp[i + 1] && (tofNsigmaPr < tofPIDcut[i] && tofNsigmaPi > cRejNsigmaTof && tofNsigmaKa > cRejNsigmaTof && tofNsigmaEl > cRejNsigmaTof))
             tofPIDPassed = true;
         }
-        if (tpcNsigmaPr < cMaxTPCnSigmaProton  && tpcNsigmaPi > cRejNsigmaTpcVeto && tpcNsigmaKa > cRejNsigmaTpcVeto && tpcNsigmaEl > cRejNsigmaTpcVeto)
+        if (tpcNsigmaPr < cMaxTPCnSigmaProton && tpcNsigmaPi > cRejNsigmaTpcVeto && tpcNsigmaKa > cRejNsigmaTpcVeto && tpcNsigmaEl > cRejNsigmaTpcVeto)
           tpcPIDPassed = true;
       }
 
       // circular cut
-      if ((nsigmaCutCombinedProton > 0) && p >= cPMin && (tpcTofNsigmaPr < combinedCut && tpcTofNsigmaPi > combinedRejCut && tpcTofNsigmaKa > combinedRejCut  && tpcTofNsigmaEl > combinedRejCut)) {
+      if ((nsigmaCutCombinedProton > 0) && p >= cPMin && (tpcTofNsigmaPr < combinedCut && tpcTofNsigmaPi > combinedRejCut && tpcTofNsigmaKa > combinedRejCut && tpcTofNsigmaEl > combinedRejCut)) {
         tofPIDPassed = true;
         tpcPIDPassed = true;
       }
@@ -308,7 +308,7 @@ struct lambdaAnalysis_pb {
       }
 
       // circular
-      if ((nsigmaCutCombinedKaon > 0) && p >= cPMin && (tpcTofNsigmaKa < combinedCut && tpcTofNsigmaPi > combinedRejCut && tpcTofNsigmaPr > combinedRejCut  && tpcTofNsigmaEl > combinedRejCut)) {
+      if ((nsigmaCutCombinedKaon > 0) && p >= cPMin && (tpcTofNsigmaKa < combinedCut && tpcTofNsigmaPi > combinedRejCut && tpcTofNsigmaPr > combinedRejCut && tpcTofNsigmaEl > combinedRejCut)) {
         tofPIDPassed = true;
         tpcPIDPassed = true;
       }
