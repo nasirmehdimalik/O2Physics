@@ -44,7 +44,7 @@ DECLARE_SOA_COLUMN(BMagField, bMagField, float);   //! Magnetic field
 } // namespace resocollisiondf
 DECLARE_SOA_TABLE(ResoCollisionDFs, "AOD", "RESOCOLLISIONDF",
                   o2::soa::Index<>,
-		  o2::aod::mult::MultNTracksPV,
+                  o2::aod::mult::MultNTracksPV,
                   collision::PosX,
                   collision::PosY,
                   collision::PosZ,
@@ -56,7 +56,7 @@ DECLARE_SOA_TABLE(ResoCollisionDFs, "AOD", "RESOCOLLISIONDF",
                   resocollisiondf::EvtPlResBC,
                   resocollisiondf::BMagField,
                   timestamp::Timestamp,
-		  evsel::NumTracksInTimeRange);
+                  evsel::NumTracksInTimeRange);
 using ResoCollisionDF = ResoCollisionDFs::iterator;
 
 // Resonance Daughters
