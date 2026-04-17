@@ -277,7 +277,7 @@ struct ResonanceInitializer {
                                                     || (nabs(aod::mcparticle::pdgCode) == 3324)    // Xi(1530)0
                                                     || (nabs(aod::mcparticle::pdgCode) == 10323)   // K1(1270)+
                                                     || (nabs(aod::mcparticle::pdgCode) == 123314)  // Xi(1820)0
-                                                    || (nabs(aod::mcparticle::pdgCode) == 123324) // Xi(1820)-0
+                                                    || (nabs(aod::mcparticle::pdgCode) == 123324)  // Xi(1820)-0
                                                     || (nabs(aod::mcparticle::pdgCode) == 3124)    // Lambda(1520) (Standard)
                                                     || (nabs(aod::mcparticle::pdgCode) == 2212)    // Proton
                                                     || (nabs(aod::mcparticle::pdgCode) == 3122)    // Lambda0
