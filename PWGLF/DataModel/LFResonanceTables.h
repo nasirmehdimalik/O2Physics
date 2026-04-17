@@ -215,7 +215,7 @@ DECLARE_SOA_COLUMN(DecayVtxY, decayVtxY, float);                                
 DECLARE_SOA_COLUMN(DecayVtxZ, decayVtxZ, float);                                  //! Z position of the decay vertex
 DECLARE_SOA_COLUMN(Alpha, alpha, float);                                          //! Alpha of the decay vertex
 DECLARE_SOA_COLUMN(QtArm, qtarm, float);                                          //! Armenteros Qt of the decay vertex
-DECLARE_SOA_COLUMN(TpcSignal10, tpcSignal10, int16_t);                             //! TPC signal of the track x10
+DECLARE_SOA_COLUMN(TpcSignal10, tpcSignal10, int16_t);                            //! TPC signal of the track x10
 DECLARE_SOA_COLUMN(DaughterTPCNSigmaPosPi10, daughterTPCNSigmaPosPi10, int8_t);   //! TPC PID x10 of the positive daughter as Pion
 DECLARE_SOA_COLUMN(DaughterTPCNSigmaPosKa10, daughterTPCNSigmaPosKa10, int8_t);   //! TPC PID x10 of the positive daughter as Kaon
 DECLARE_SOA_COLUMN(DaughterTPCNSigmaPosPr10, daughterTPCNSigmaPosPr10, int8_t);   //! TPC PID x10 of the positive daughter as Proton
