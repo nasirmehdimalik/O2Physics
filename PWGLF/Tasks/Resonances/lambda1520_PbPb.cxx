@@ -140,7 +140,7 @@ struct lambdaAnalysis_pb {
   Configurable<bool> cEvtMCVtxIn10{"cEvtMCVtxIn10", false, "MC event sel: isVtxIn10"};
   Configurable<bool> cEvtMCTriggerTVX{"cEvtMCTriggerTVX", false, "MC event sel: isTriggerTVX"};
   Configurable<bool> cEvtMCRecINELgt0{"cEvtMCRecINELgt0", false, "MC event sel: isRecINELgt0"};
- // Histogram Registry.
+  // Histogram Registry.
   HistogramRegistry histos{"histos", {}, OutputObjHandlingPolicy::AnalysisObject};
 
   void init(InitContext const&)
