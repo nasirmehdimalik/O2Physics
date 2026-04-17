@@ -310,7 +310,7 @@ DECLARE_SOA_DYNAMIC_COLUMN(DaughterTOFNSigmaBachPr, daughterTOFNSigmaBachPr,
                            [](int8_t daughterTOFNSigmaBachPr10) { return (float)daughterTOFNSigmaBachPr10 / 10.f; });
 // TPC signal x10
 DECLARE_SOA_DYNAMIC_COLUMN(TpcSignal, tpcSignal,
-                           [](int8_t tpcSignal10) { return (float)tpcSignal10 / 10.f; });
+                           [](int16_t tpcSignal10) { return (float)tpcSignal10 / 100.f; });
 // pT, Eta, Phi
 // DECLARE_SOA_DYNAMIC_COLUMN(Pt, pt, [](float px, float py) -> float { return RecoDecay::sqrtSumOfSquares(px, py); });
 DECLARE_SOA_DYNAMIC_COLUMN(Eta, eta, [](float px, float py, float pz) -> float { return RecoDecay::eta(std::array{px, py, pz}); });
