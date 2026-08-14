@@ -360,13 +360,20 @@ struct Lambda1520pbpb {
   template <typename T>
   bool selTracks(T const& track)
   {
-    if (track.pt() < cPtMin) return false;
-    if (std::abs(track.eta()) > cEtaCut) return false;
-    if (cPrimaryTrack && !track.isPrimaryTrack()) return false;
-    if (cGlobalWoDCATrack && !track.isGlobalTrackWoDCA()) return false;
-    if (cPVContributor && !track.isPVContributor()) return false;
-    if (cfgUseCrossedRows && track.tpcNClsCrossedRows() < cfgMinCrossedRows) return false;
-    if (cfgUseTPCcls && track.tpcNClsFound() < cfgMinTPCcls) return false;
+    if (track.pt() < cPtMin)
+      return false;
+    if (std::abs(track.eta()) > cEtaCut)
+      return false;
+    if (cPrimaryTrack && !track.isPrimaryTrack())
+      return false;
+    if (cGlobalWoDCATrack && !track.isGlobalTrackWoDCA())
+      return false;
+    if (cPVContributor && !track.isPVContributor())
+      return false;
+    if (cfgUseCrossedRows && track.tpcNClsCrossedRows() < cfgMinCrossedRows)
+      return false;
+    if (cfgUseTPCcls && track.tpcNClsFound() < cfgMinTPCcls)
+      return false;
     return true;
   }
 
@@ -383,8 +390,10 @@ struct Lambda1520pbpb {
           std::abs(track.dcaXY()) < dcaXYPr[i])
         dcaXYPassed = true;
     }
-    if (!dcaXYPassed) return false;
-    if (std::abs(track.dcaZ()) > cDcazMin) return false;
+    if (!dcaXYPassed)
+      return false;
+    if (std::abs(track.dcaZ()) > cDcazMin)
+      return false;
     return true;
   }
 
@@ -401,8 +410,10 @@ struct Lambda1520pbpb {
           std::abs(track.dcaXY()) < dcaXYKa[i])
         dcaXYPassed = true;
     }
-    if (!dcaXYPassed) return false;
-    if (std::abs(track.dcaZ()) > cDcazMin) return false;
+    if (!dcaXYPassed)
+      return false;
+    if (std::abs(track.dcaZ()) > cDcazMin)
+      return false;
     return true;
   }
 
@@ -431,13 +442,15 @@ struct Lambda1520pbpb {
     float combinedRejCut = cRejNsigmaTof * cRejNsigmaTpc;
 
     if (!cUseTpcOnly && candidate.hasTOF()) {
-      if (candidate.tofNSigmaPr() < minnsigmatofPr) return false;
+      if (candidate.tofNSigmaPr() < minnsigmatofPr)
+        return false;
       if (nsigmaCutCombinedProton < 0 && p >= cPMin) {
         for (int i = 0; i < nitrtof - 1; ++i) {
           if (p >= tofPIDp[i] && p < tofPIDp[i + 1] && (tofNsigmaPr < tofPIDcut[i] && tofNsigmaPi > cRejNsigmaTof && tofNsigmaKa > cRejNsigmaTof))
             tofPIDPassed = true;
         }
-        if (candidate.tpcNSigmaPr() < minnsigmatpctofPr) return false;
+        if (candidate.tpcNSigmaPr() < minnsigmatpctofPr)
+          return false;
         if (tpcNsigmaPr < cMaxTPCnSigmaProton && tpcNsigmaPi > cRejNsigmaTpcVeto && tpcNsigmaKa > cRejNsigmaTpcVeto)
           tpcPIDPassed = true;
       }
@@ -453,14 +466,16 @@ struct Lambda1520pbpb {
       }
     } else {
       tofPIDPassed = true;
-      if (candidate.tpcNSigmaPr() < minnsigmatpcPr) return false;
+      if (candidate.tpcNSigmaPr() < minnsigmatpcPr)
+        return false;
       for (int i = 0; i < nitr - 1; ++i) {
         if (p >= tpcPIDp[i] && p < tpcPIDp[i + 1] && (tpcNsigmaPr < tpcPIDcut[i] && tpcNsigmaPi > cRejNsigmaTpcPi && tpcNsigmaKa > cRejNsigmaTpcKa)) {
           tpcPIDPassed = true;
         }
       }
     }
-    if (tpcPIDPassed && tofPIDPassed) return true;
+    if (tpcPIDPassed && tofPIDPassed)
+      return true;
     return false;
   }
 
@@ -489,13 +504,15 @@ struct Lambda1520pbpb {
     float combinedRejCut = cRejNsigmaTpc * cRejNsigmaTof;
 
     if (!cUseTpcOnly && candidate.hasTOF()) {
-      if (candidate.tofNSigmaKa() < minnsigmatofKa) return false;
+      if (candidate.tofNSigmaKa() < minnsigmatofKa)
+        return false;
       if (nsigmaCutCombinedKaon < 0 && p >= cPMin) {
         for (int i = 0; i < nitrtof - 1; ++i) {
           if (p >= tofPIDp[i] && p < tofPIDp[i + 1] && (tofNsigmaKa < tofPIDcut[i] && tofNsigmaPi > cRejNsigmaTof && tofNsigmaPr > cRejNsigmaTof))
             tofPIDPassed = true;
         }
-        if (candidate.tpcNSigmaKa() < minnsigmatpctofKa) return false;
+        if (candidate.tpcNSigmaKa() < minnsigmatpctofKa)
+          return false;
         if (tpcNsigmaKa < cMaxTPCnSigmaKaon && tpcNsigmaPi > cRejNsigmaTpcVeto && tpcNsigmaPr > cRejNsigmaTpcVeto)
           tpcPIDPassed = true;
       }
@@ -511,14 +528,16 @@ struct Lambda1520pbpb {
       }
     } else {
       tofPIDPassed = true;
-      if (candidate.tpcNSigmaKa() < minnsigmatpcKa) return false;
+      if (candidate.tpcNSigmaKa() < minnsigmatpcKa)
+        return false;
       for (int i = 0; i < nitr - 1; ++i) {
         if (p >= tpcPIDp[i] && p < tpcPIDp[i + 1] && (tpcNsigmaKa < tpcPIDcut[i] && tpcNsigmaPi > cRejNsigmakTpcPi && tpcNsigmaPr > cRejNsigmakTpcPr)) {
           tpcPIDPassed = true;
         }
       }
     }
-    if (tpcPIDPassed && tofPIDPassed) return true;
+    if (tpcPIDPassed && tofPIDPassed)
+      return true;
     return false;
   }
 
@@ -543,7 +562,8 @@ struct Lambda1520pbpb {
   static std::array<float, 3> vecUnit(const std::array<float, 3>& a)
   {
     float mag = std::sqrt(vecDot(a, a));
-    if (mag < VecUnitEpsilon) return {0.f, 0.f, 0.f};
+    if (mag < VecUnitEpsilon)
+      return {0.f, 0.f, 0.f};
     return {a[0] / mag, a[1] / mag, a[2] / mag};
   }
 
@@ -552,7 +572,8 @@ struct Lambda1520pbpb {
   {
     float pMag2 = vecDot(motherP, motherP);
     float pMag = std::sqrt(pMag2);
-    if (pMag < MomentumEpsilon) return dP;
+    if (pMag < MomentumEpsilon)
+      return dP;
 
     std::array<float, 3> nHat = {motherP[0] / pMag, motherP[1] / pMag, motherP[2] / pMag};
     float beta = pMag / motherE;
@@ -574,10 +595,10 @@ struct Lambda1520pbpb {
 
   template <PolBkgMode Mode>
   void fillPolarization(float candMass, float candPt,
-                         const std::array<float, 3>& motherP, float motherE,
-                         const std::array<float, 3>& protonP, float protonE,
-                         const std::array<float, 3>& kaonP, float kaonE,
-                         float mult, bool protonIsPositive)
+                        const std::array<float, 3>& motherP, float motherE,
+                        const std::array<float, 3>& protonP, float protonE,
+                        const std::array<float, 3>& kaonP, float kaonE,
+                        float mult, bool protonIsPositive)
   {
     if (!cActivateHelicityFrame && !cActivateCollinsSoperFrame && !cActivateProductionFrame &&
         !cActivateBeamAxisFrame && !cActivateRandomFrame)
@@ -589,20 +610,30 @@ struct Lambda1520pbpb {
 
     auto fillFrame = [&](float cosTheta) {
       if constexpr (Mode == PolBkgMode::Rotated) {
-        if (protonIsPositive) histos.fill(HIST("Analysis/h4d_pol_rot_PM"), candMass, candPt, mult, cosTheta);
-        else histos.fill(HIST("Analysis/h4d_pol_rot_MP"), candMass, candPt, mult, cosTheta);
+        if (protonIsPositive)
+          histos.fill(HIST("Analysis/h4d_pol_rot_PM"), candMass, candPt, mult, cosTheta);
+        else
+          histos.fill(HIST("Analysis/h4d_pol_rot_MP"), candMass, candPt, mult, cosTheta);
       } else if constexpr (Mode == PolBkgMode::Mixed) {
-        if (protonIsPositive) histos.fill(HIST("Analysis/h4d_pol_mix_PM"), candMass, candPt, mult, cosTheta);
-        else histos.fill(HIST("Analysis/h4d_pol_mix_MP"), candMass, candPt, mult, cosTheta);
+        if (protonIsPositive)
+          histos.fill(HIST("Analysis/h4d_pol_mix_PM"), candMass, candPt, mult, cosTheta);
+        else
+          histos.fill(HIST("Analysis/h4d_pol_mix_MP"), candMass, candPt, mult, cosTheta);
       } else if constexpr (Mode == PolBkgMode::LikeSign) {
-        if (protonIsPositive) histos.fill(HIST("Analysis/h4d_pol_LS_PP"), candMass, candPt, mult, cosTheta);
-        else histos.fill(HIST("Analysis/h4d_pol_LS_MM"), candMass, candPt, mult, cosTheta);
+        if (protonIsPositive)
+          histos.fill(HIST("Analysis/h4d_pol_LS_PP"), candMass, candPt, mult, cosTheta);
+        else
+          histos.fill(HIST("Analysis/h4d_pol_LS_MM"), candMass, candPt, mult, cosTheta);
       } else if constexpr (Mode == PolBkgMode::LikeSignMixed) {
-        if (protonIsPositive) histos.fill(HIST("Analysis/h4d_pol_LS_PP_mix"), candMass, candPt, mult, cosTheta);
-        else histos.fill(HIST("Analysis/h4d_pol_LS_MM_mix"), candMass, candPt, mult, cosTheta);
+        if (protonIsPositive)
+          histos.fill(HIST("Analysis/h4d_pol_LS_PP_mix"), candMass, candPt, mult, cosTheta);
+        else
+          histos.fill(HIST("Analysis/h4d_pol_LS_MM_mix"), candMass, candPt, mult, cosTheta);
       } else {
-        if (protonIsPositive) histos.fill(HIST("Analysis/h4d_pol_US_PM"), candMass, candPt, mult, cosTheta);
-        else histos.fill(HIST("Analysis/h4d_pol_US_MP"), candMass, candPt, mult, cosTheta);
+        if (protonIsPositive)
+          histos.fill(HIST("Analysis/h4d_pol_US_PM"), candMass, candPt, mult, cosTheta);
+        else
+          histos.fill(HIST("Analysis/h4d_pol_US_MP"), candMass, candPt, mult, cosTheta);
       }
     };
 
@@ -634,8 +665,8 @@ struct Lambda1520pbpb {
       double randPhi = randUniform01(randGen) * o2::constants::math::TwoPI;
       double randSin = std::sqrt(1. - randCos * randCos);
       std::array<float, 3> zAxisRD = {static_cast<float>(randSin * std::cos(randPhi)),
-                                       static_cast<float>(randSin * std::sin(randPhi)),
-                                       static_cast<float>(randCos)};
+                                      static_cast<float>(randSin * std::sin(randPhi)),
+                                      static_cast<float>(randCos)};
       fillFrame(vecDot(refCM, zAxisRD));
     }
   }
@@ -651,11 +682,17 @@ struct Lambda1520pbpb {
                      static_cast<bool>(cActivateRandomFrame);
 
     for (auto const& [trkPr, trkKa] : soa::combinations(soa::CombinationsFullIndexPolicy(trk1, trk2))) {
-      if (trkPr.index() == trkKa.index()) continue;
-      if (!selTracks(trkPr) || !selTracks(trkKa)) continue;
+      if (trkPr.index() == trkKa.index())
+        continue;
+      if (!selTracks(trkPr) || !selTracks(trkKa))
+        continue;
 
-      auto pxPr = trkPr.px(); auto pyPr = trkPr.py(); auto pzPr = trkPr.pz();
-      auto pxKa = trkKa.px(); auto pyKa = trkKa.py(); auto pzKa = trkKa.pz();
+      auto pxPr = trkPr.px();
+      auto pyPr = trkPr.py();
+      auto pzPr = trkPr.pz();
+      auto pxKa = trkKa.px();
+      auto pyKa = trkKa.py();
+      auto pzKa = trkKa.pz();
 
       prptot = std::sqrt(pxPr * pxPr + pyPr * pyPr + pzPr * pzPr);
       kaptot = std::sqrt(pxKa * pxKa + pyKa * pyKa + pzKa * pzKa);
@@ -677,12 +714,17 @@ struct Lambda1520pbpb {
         }
       }
 
-      if (cUseOnlyTOFTrackPr && !trkPr.hasTOF()) continue;
-      if (cUseOnlyTOFTrackKa && !trkKa.hasTOF()) continue;
-      if (!selectionPIDProton(trkPr, prptot) || !selectionPIDKaon(trkKa, kaptot)) continue;
-      if (!dcaSelectionProton(trkPr, prptot) || !dcaSelectionKaon(trkKa, kaptot)) continue;
+      if (cUseOnlyTOFTrackPr && !trkPr.hasTOF())
+        continue;
+      if (cUseOnlyTOFTrackKa && !trkKa.hasTOF())
+        continue;
+      if (!selectionPIDProton(trkPr, prptot) || !selectionPIDKaon(trkKa, kaptot))
+        continue;
+      if (!dcaSelectionProton(trkPr, prptot) || !dcaSelectionKaon(trkKa, kaptot))
+        continue;
 
-      if (isDeepAngle && std::acos((trkPr.pt() * trkKa.pt() + pzPr * pzKa) / (prptot * kaptot)) < cfgDeepAngle) continue;
+      if (isDeepAngle && std::acos((trkPr.pt() * trkKa.pt() + pzPr * pzKa) / (prptot * kaptot)) < cfgDeepAngle)
+        continue;
 
       if constexpr (!mix) {
         // ====================================================================
@@ -764,7 +806,8 @@ struct Lambda1520pbpb {
         }
       }
 
-      if (isonlyQC) continue;
+      if (isonlyQC)
+        continue;
 
       std::array<float, 3> pvec0 = {pxPr, pyPr, pzPr};
       std::array<float, 3> pvec1 = {pxKa, pyKa, pzKa};
@@ -774,13 +817,16 @@ struct Lambda1520pbpb {
       float candY = std::abs(RecoDecay::y(std::array{pxPr + pxKa, pyPr + pyKa, pzPr + pzKa}, candMass));
       float candYShift = candY - cfgRapidityShift;
 
-      if (std::abs(candYShift) > cfgRapidityCut) continue;
+      if (std::abs(candYShift) > cfgRapidityCut)
+        continue;
 
       if constexpr (!mix && !mc) {
         if (trkPr.sign() * trkKa.sign() < 0) {
           if (!polActive) {
-            if (trkPr.sign() > 0) histos.fill(HIST("Analysis/h4d_lstar_invm_US_PM"), candMass, candPt, mult, occup);
-            else histos.fill(HIST("Analysis/h4d_lstar_invm_US_MP"), candMass, candPt, mult, occup);
+            if (trkPr.sign() > 0)
+              histos.fill(HIST("Analysis/h4d_lstar_invm_US_PM"), candMass, candPt, mult, occup);
+            else
+              histos.fill(HIST("Analysis/h4d_lstar_invm_US_MP"), candMass, candPt, mult, occup);
           }
 
           if (polActive) {
@@ -809,7 +855,8 @@ struct Lambda1520pbpb {
                 float candYRot = std::abs(RecoDecay::y(std::array{pxPr + pxKaRot, pyPr + pyKaRot, pzPr + pzKa}, MassLambda1520));
                 float candYShiftRot = candYRot - cfgRapidityShift;
 
-                if (std::abs(candYShiftRot) > cfgRapidityCut) continue;
+                if (std::abs(candYShiftRot) > cfgRapidityCut)
+                  continue;
 
                 if (doPolarizationRot) {
                   float eKaonRot = std::sqrt(pxKaRot * pxKaRot + pyKaRot * pyKaRot + pzKa * pzKa + MassKaonCharged * MassKaonCharged);
@@ -821,29 +868,34 @@ struct Lambda1520pbpb {
               }
             }
           } else if (doRotate) {
-              for (int i = 0; i < cNofRotations; i++) {
-                float delta = o2::constants::math::PI / rotationalcut;
-                float theta2 = (cNofRotations == 1) ? o2::constants::math::PI : (o2::constants::math::PI - delta) + i * (2.f * delta / (cNofRotations - 1));
-                float phiRot = RecoDecay::constrainAngle(trkKa.phi() + theta2, 0.f);
-                float pxKaRot = trkKa.pt() * std::cos(phiRot);
-                float pyKaRot = trkKa.pt() * std::sin(phiRot);
-                std::array<float, 3> pvec0rot = {pxPr, pyPr, pzPr};
-                std::array<float, 3> pvec1rot = {pxKaRot, pyKaRot, pzKa};
-                std::array<std::array<float, 3>, 2> arrMomRot = {pvec0rot, pvec1rot};
-                float candMassRot = RecoDecay::m(arrMomRot, std::array{MassProton, MassKaonCharged});
-                float candPtRot = RecoDecay::pt(std::array{pxPr + pxKaRot, pyPr + pyKaRot});
-                float candYRot = std::abs(RecoDecay::y(std::array{pxPr + pxKaRot, pyPr + pyKaRot, pzPr + pzKa}, MassLambda1520));
+            for (int i = 0; i < cNofRotations; i++) {
+              float delta = o2::constants::math::PI / rotationalcut;
+              float theta2 = (cNofRotations == 1) ? o2::constants::math::PI : (o2::constants::math::PI - delta) + i * (2.f * delta / (cNofRotations - 1));
+              float phiRot = RecoDecay::constrainAngle(trkKa.phi() + theta2, 0.f);
+              float pxKaRot = trkKa.pt() * std::cos(phiRot);
+              float pyKaRot = trkKa.pt() * std::sin(phiRot);
+              std::array<float, 3> pvec0rot = {pxPr, pyPr, pzPr};
+              std::array<float, 3> pvec1rot = {pxKaRot, pyKaRot, pzKa};
+              std::array<std::array<float, 3>, 2> arrMomRot = {pvec0rot, pvec1rot};
+              float candMassRot = RecoDecay::m(arrMomRot, std::array{MassProton, MassKaonCharged});
+              float candPtRot = RecoDecay::pt(std::array{pxPr + pxKaRot, pyPr + pyKaRot});
+              float candYRot = std::abs(RecoDecay::y(std::array{pxPr + pxKaRot, pyPr + pyKaRot, pzPr + pzKa}, MassLambda1520));
 
-                if (std::abs(candYRot - cfgRapidityShift) > cfgRapidityCut) continue;
+              if (std::abs(candYRot - cfgRapidityShift) > cfgRapidityCut)
+                continue;
 
-                if (trkPr.sign() > 0) histos.fill(HIST("Analysis/h4d_lstar_invm_rot_PM"), candMassRot, candPtRot, mult, occup);
-                else histos.fill(HIST("Analysis/h4d_lstar_invm_rot_MP"), candMassRot, candPtRot, mult, occup);
-              }
+              if (trkPr.sign() > 0)
+                histos.fill(HIST("Analysis/h4d_lstar_invm_rot_PM"), candMassRot, candPtRot, mult, occup);
+              else
+                histos.fill(HIST("Analysis/h4d_lstar_invm_rot_MP"), candMassRot, candPtRot, mult, occup);
+            }
           }
         } else {
           if (!polActive) {
-            if (trkPr.sign() > 0) histos.fill(HIST("Analysis/h4d_lstar_invm_PP"), candMass, candPt, mult, occup);
-            else histos.fill(HIST("Analysis/h4d_lstar_invm_MM"), candMass, candPt, mult, occup);
+            if (trkPr.sign() > 0)
+              histos.fill(HIST("Analysis/h4d_lstar_invm_PP"), candMass, candPt, mult, occup);
+            else
+              histos.fill(HIST("Analysis/h4d_lstar_invm_MM"), candMass, candPt, mult, occup);
           } else {
             float eProton = std::sqrt(pxPr * pxPr + pyPr * pyPr + pzPr * pzPr + MassProton * MassProton);
             float eKaon = std::sqrt(pxKa * pxKa + pyKa * pyKa + pzKa * pzKa + MassKaonCharged * MassKaonCharged);
@@ -859,8 +911,10 @@ struct Lambda1520pbpb {
       if constexpr (mix) {
         if (trkPr.sign() * trkKa.sign() < 0) {
           if (!polActive) {
-            if (trkPr.sign() > 0) histos.fill(HIST("Analysis/h4d_lstar_invm_US_PM_mix"), candMass, candPt, mult, occup);
-            else histos.fill(HIST("Analysis/h4d_lstar_invm_US_MP_mix"), candMass, candPt, mult, occup);
+            if (trkPr.sign() > 0)
+              histos.fill(HIST("Analysis/h4d_lstar_invm_US_PM_mix"), candMass, candPt, mult, occup);
+            else
+              histos.fill(HIST("Analysis/h4d_lstar_invm_US_MP_mix"), candMass, candPt, mult, occup);
           }
           if (doPolarizationMix && polActive) {
             float eProton = std::sqrt(pxPr * pxPr + pyPr * pyPr + pzPr * pzPr + MassProton * MassProton);
@@ -873,8 +927,10 @@ struct Lambda1520pbpb {
           }
         } else {
           if (!polActive) {
-            if (trkPr.sign() > 0) histos.fill(HIST("Analysis/h4d_lstar_invm_LS_PP_mix"), candMass, candPt, mult, occup);
-            else histos.fill(HIST("Analysis/h4d_lstar_invm_LS_MM_mix"), candMass, candPt, mult, occup);
+            if (trkPr.sign() > 0)
+              histos.fill(HIST("Analysis/h4d_lstar_invm_LS_PP_mix"), candMass, candPt, mult, occup);
+            else
+              histos.fill(HIST("Analysis/h4d_lstar_invm_LS_MM_mix"), candMass, candPt, mult, occup);
           }
           if (doPolarizationMix && polActive) {
             float eProton = std::sqrt(pxPr * pxPr + pyPr * pyPr + pzPr * pzPr + MassProton * MassProton);
@@ -889,12 +945,18 @@ struct Lambda1520pbpb {
       }
       if constexpr (mc) {
         if (trkPr.sign() * trkKa.sign() < 0) {
-          if (std::abs(trkPr.pdgCode()) != kProton || std::abs(trkKa.pdgCode()) != kKPlus) continue;
-          if (trkPr.motherId() != trkKa.motherId()) continue;
-          if (trkPr.motherPDG() != trkKa.motherPDG()) continue;
-          if (trkPr.pdgCode() == 0 || trkKa.pdgCode() == 0) continue;
-          if (trkPr.motherPDG() == -1 || trkKa.motherPDG() == -1) continue;
-          if (std::abs(trkPr.motherPDG()) != lambda1520id) continue;
+          if (std::abs(trkPr.pdgCode()) != kProton || std::abs(trkKa.pdgCode()) != kKPlus)
+            continue;
+          if (trkPr.motherId() != trkKa.motherId())
+            continue;
+          if (trkPr.motherPDG() != trkKa.motherPDG())
+            continue;
+          if (trkPr.pdgCode() == 0 || trkKa.pdgCode() == 0)
+            continue;
+          if (trkPr.motherPDG() == -1 || trkKa.motherPDG() == -1)
+            continue;
+          if (std::abs(trkPr.motherPDG()) != lambda1520id)
+            continue;
 
           float massParent = 0.;
           for (auto const& resoParent : *mResoParents) {
@@ -924,7 +986,8 @@ struct Lambda1520pbpb {
 
   void processData(ResoCols::iterator const& collision, ResoTracks const& tracks)
   {
-    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0()) return;
+    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0())
+      return;
     histos.fill(HIST("Event/h1d_ft0_mult_percentile"), collision.cent(), 100);
     histos.fill(HIST("Event/h_ft0_vz"), collision.posZ());
     fillDataHistos<false, false>(tracks, tracks, collision.cent());
@@ -935,17 +998,23 @@ struct Lambda1520pbpb {
   void processMC(ResoMCCols::iterator const& collision, soa::Join<aod::ResoTracks, aod::ResoMCTracks> const& tracks, aod::ResoMCParents const& resoParents)
   {
     histos.fill(HIST("Event/hMCEventCutflow"), 0);
-    if (cEvtMCTriggerTVX && !collision.isTriggerTVX()) return;
+    if (cEvtMCTriggerTVX && !collision.isTriggerTVX())
+      return;
     histos.fill(HIST("Event/hMCEventCutflow"), 1);
-    if (cEvtMCVtxIn10 && !collision.isVtxIn10()) return;
+    if (cEvtMCVtxIn10 && !collision.isVtxIn10())
+      return;
     histos.fill(HIST("Event/hMCEventCutflow"), 2);
-    if (cEvtMCINELgt0 && !collision.isINELgt0()) return;
+    if (cEvtMCINELgt0 && !collision.isINELgt0())
+      return;
     histos.fill(HIST("Event/hMCEventCutflow"), 3);
-    if (cEvtMCSel8 && !collision.isInSel8()) return;
+    if (cEvtMCSel8 && !collision.isInSel8())
+      return;
     histos.fill(HIST("Event/hMCEventCutflow"), 4);
-    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0()) return;
+    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0())
+      return;
     histos.fill(HIST("Event/hMCEventCutflow"), 5);
-    if (cEvtMCAfterAllCuts && !collision.isInAfterAllCuts()) return;
+    if (cEvtMCAfterAllCuts && !collision.isInAfterAllCuts())
+      return;
     histos.fill(HIST("Event/hMCEventCutflow"), 6);
 
     auto mult = collision.cent();
@@ -960,34 +1029,46 @@ struct Lambda1520pbpb {
       histos.fill(HIST("QAbefore/hPhi_rec"), track.phi());
       histos.fill(HIST("QAbefore/hEtaPhi_rec"), track.eta(), track.phi());
 
-      if (std::abs(track.pdgCode()) == kKPlus) histos.fill(HIST("QAChecks/h1d_ka_gen_pt"), track.pt());
-      if (std::abs(track.pdgCode()) == kProton) histos.fill(HIST("QAChecks/h1d_pr_gen_pt"), track.pt());
+      if (std::abs(track.pdgCode()) == kKPlus)
+        histos.fill(HIST("QAChecks/h1d_ka_gen_pt"), track.pt());
+      if (std::abs(track.pdgCode()) == kProton)
+        histos.fill(HIST("QAChecks/h1d_pr_gen_pt"), track.pt());
 
-      if (!selTracks(track)) continue;
+      if (!selTracks(track))
+        continue;
       float p = std::sqrt(track.px() * track.px() + track.py() * track.py() + track.pz() * track.pz());
 
       if (selectionPIDKaon(track, p)) {
-        if (std::abs(track.pdgCode()) == kKPlus) histos.fill(HIST("QAChecks/h1d_ka_rec_pt"), track.pt());
+        if (std::abs(track.pdgCode()) == kKPlus)
+          histos.fill(HIST("QAChecks/h1d_ka_rec_pt"), track.pt());
       }
       if (selectionPIDProton(track, p)) {
-        if (std::abs(track.pdgCode()) == kProton) histos.fill(HIST("QAChecks/h1d_pr_rec_pt"), track.pt());
+        if (std::abs(track.pdgCode()) == kProton)
+          histos.fill(HIST("QAChecks/h1d_pr_rec_pt"), track.pt());
       }
     }
 
     for (auto const& part : resoParents) {
-      if (std::abs(part.pdgCode()) != lambda1520id) continue;
+      if (std::abs(part.pdgCode()) != lambda1520id)
+        continue;
       float yshift = std::abs(part.y()) - cfgRapidityShift;
-      if (std::abs(yshift) > cfgRapidityCut) continue;
+      if (std::abs(yshift) > cfgRapidityCut)
+        continue;
 
       bool pass1 = false, pass2 = false;
-      if (std::abs(part.daughterPDG1()) == kProton || std::abs(part.daughterPDG2()) == kProton) pass1 = true;
-      if (std::abs(part.daughterPDG1()) == kKPlus || std::abs(part.daughterPDG2()) == kKPlus) pass2 = true;
+      if (std::abs(part.daughterPDG1()) == kProton || std::abs(part.daughterPDG2()) == kProton)
+        pass1 = true;
+      if (std::abs(part.daughterPDG1()) == kKPlus || std::abs(part.daughterPDG2()) == kKPlus)
+        pass2 = true;
 
-      if (!pass1 || !pass2) continue;
+      if (!pass1 || !pass2)
+        continue;
       std::array<float, 3> pvec = {part.px(), part.py(), part.pz()};
       float mass = RecoDecay::m(pvec, part.e());
-      if (part.pdgCode() > 0) histos.fill(HIST("Analysis/h3d_gen_lstar_PM"), mass, part.pt(), mult);
-      else histos.fill(HIST("Analysis/h3d_gen_lstar_MP"), mass, part.pt(), mult);
+      if (part.pdgCode() > 0)
+        histos.fill(HIST("Analysis/h3d_gen_lstar_PM"), mass, part.pt(), mult);
+      else
+        histos.fill(HIST("Analysis/h3d_gen_lstar_MP"), mass, part.pt(), mult);
     }
   }
   PROCESS_SWITCH(Lambda1520pbpb, processMC, "Process Event for MC", false);
@@ -996,22 +1077,29 @@ struct Lambda1520pbpb {
   {
     float centrality = collision.cent();
     histos.fill(HIST("SignalLoss/hMCEventCutflow"), 0);
-    if (cEvtMCTriggerTVX && !collision.isTriggerTVX()) return;
+    if (cEvtMCTriggerTVX && !collision.isTriggerTVX())
+      return;
     histos.fill(HIST("SignalLoss/hMCEventCutflow"), 1);
-    if (cEvtMCVtxIn10 && !collision.isVtxIn10()) return;
+    if (cEvtMCVtxIn10 && !collision.isVtxIn10())
+      return;
     histos.fill(HIST("SignalLoss/hMCEventCutflow"), 2);
-    if (cEvtMCINELgt0 && !collision.isINELgt0()) return;
+    if (cEvtMCINELgt0 && !collision.isINELgt0())
+      return;
     histos.fill(HIST("SignalLoss/hMCEventCutflow"), 3);
-    if (cEvtMCSel8 && !collision.isInSel8()) return;
+    if (cEvtMCSel8 && !collision.isInSel8())
+      return;
     histos.fill(HIST("SignalLoss/hMCEventCutflow"), 4);
-    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0()) return;
+    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0())
+      return;
     histos.fill(HIST("SignalLoss/hMCEventCutflow"), 5);
-    if (cEvtMCAfterAllCuts && !collision.isInAfterAllCuts()) return;
+    if (cEvtMCAfterAllCuts && !collision.isInAfterAllCuts())
+      return;
     histos.fill(HIST("SignalLoss/hMCEventCutflow"), 6);
 
     for (auto const& part : resoParents) {
       float yshift = std::abs(part.y()) - cfgRapidityShift;
-      if (std::abs(yshift) > cfgRapidityCut) continue;
+      if (std::abs(yshift) > cfgRapidityCut)
+        continue;
 
       int pdg = part.pdgCode();
       float ptRef = part.pt();
@@ -1022,34 +1110,44 @@ struct Lambda1520pbpb {
 
       if (pdg == kProton) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_Proton"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_Proton"), std::sqrt(ptSq), centrality);
       } else if (pdg == -kProton) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_AntiProton"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_AntiProton"), std::sqrt(ptSq), centrality);
       } else if (pdg == kLambda0) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_Lambda0"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_Lambda0"), std::sqrt(ptSq), centrality);
       } else if (pdg == -kLambda0) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_AntiLambda0"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_AntiLambda0"), std::sqrt(ptSq), centrality);
       } else if (pdg == kXiMinus) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_XiMinus"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_XiMinus"), std::sqrt(ptSq), centrality);
       } else if (pdg == -kXiMinus) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_XiPlus"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_XiPlus"), std::sqrt(ptSq), centrality);
       } else if (pdg == kXi0) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_Xi0"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_Xi0"), std::sqrt(ptSq), centrality);
       } else if (pdg == -kXi0) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_AntiXi0"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_AntiXi0"), std::sqrt(ptSq), centrality);
       } else if (pdg == kOmegaMinus) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_OmegaMinus"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_OmegaMinus"), std::sqrt(ptSq), centrality);
       } else if (pdg == -kOmegaMinus) {
         ptSq = (ptRef * ptRef) + (mass * mass) - (o2::constants::physics::MassLambda1520 * o2::constants::physics::MassLambda1520);
-        if (ptSq > 0) histos.fill(HIST("SignalLoss/hGen_mT_scaled_OmegaPlus"), std::sqrt(ptSq), centrality);
+        if (ptSq > 0)
+          histos.fill(HIST("SignalLoss/hGen_mT_scaled_OmegaPlus"), std::sqrt(ptSq), centrality);
       }
     }
   }
@@ -1066,7 +1164,8 @@ struct Lambda1520pbpb {
 
     SameKindPair<ResoCols, ResoTracks, BinningType2> pairs{binningPositions2, cNumMixEv, -1, collisions, tracksTuple, &cache};
     for (auto const& [c1, t1, c2, t2] : pairs) {
-      if (cEvtMCRecINELgt0 && !c1.isRecINELgt0()) return;
+      if (cEvtMCRecINELgt0 && !c1.isRecINELgt0())
+        return;
       histos.fill(HIST("Event/mixing_vzVsmultpercentile"), c1.cent(), c1.posZ(), c1.evtPl());
       fillDataHistos<true, false>(t1, t2, c1.cent());
     }
@@ -1080,11 +1179,14 @@ struct Lambda1520pbpb {
 
   void processDatadf(ResoColDFs::iterator const& collision, ResoTrackDFs const& tracks)
   {
-    if (doprocessData) LOG(error) << "Disable processData() first!";
-    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0()) return;
+    if (doprocessData)
+      LOG(error) << "Disable processData() first!";
+    if (cEvtMCRecINELgt0 && !collision.isRecINELgt0())
+      return;
 
     auto occup = 100;
-    if (cfgEvtOccupancyInTimeRange) occup = collision.trackOccupancyInTimeRange();
+    if (cfgEvtOccupancyInTimeRange)
+      occup = collision.trackOccupancyInTimeRange();
 
     histos.fill(HIST("Event/h1d_ft0_mult_percentile"), collision.cent(), occup);
     fillDataHistos<false, false>(tracks, tracks, collision.cent(), occup);
@@ -1095,7 +1197,8 @@ struct Lambda1520pbpb {
   using BinningTypeDF = ColumnBinningPolicy<aod::collision::PosZ, aod::resocollision::Cent>;
   void processMixDF(ResoColDFs const& collisions, ResoTrackDFs const& tracks)
   {
-    if (doprocessMix) LOG(fatal) << "Disable processMix() first!";
+    if (doprocessMix)
+      LOG(fatal) << "Disable processMix() first!";
     LOGF(debug, "Event Mixing Started");
 
     BinningTypeDF binningPositions2{{cMixVtxBins, cMixMultBins}, true};
@@ -1103,10 +1206,12 @@ struct Lambda1520pbpb {
 
     SameKindPair<ResoColDFs, ResoTrackDFs, BinningTypeDF> pairs{binningPositions2, cNumMixEv, -1, collisions, tracksTuple, &cache};
     for (auto const& [c1, t1, c2, t2] : pairs) {
-      if (cEvtMCRecINELgt0 && !c1.isRecINELgt0()) return;
+      if (cEvtMCRecINELgt0 && !c1.isRecINELgt0())
+        return;
 
       auto occup = 100;
-      if (cfgEvtOccupancyInTimeRange) occup = c1.trackOccupancyInTimeRange();
+      if (cfgEvtOccupancyInTimeRange)
+        occup = c1.trackOccupancyInTimeRange();
 
       histos.fill(HIST("Event/mixing_vzVsmultpercentile"), c1.cent(), c1.posZ(), c1.evtPl());
       fillDataHistos<true, false>(t1, t2, c1.cent(), occup);
@@ -1118,7 +1223,8 @@ struct Lambda1520pbpb {
   using BinningTypeEP = ColumnBinningPolicy<aod::collision::PosZ, aod::resocollision::Cent, aod::resocollision::EvtPl>;
   void processMixepDF(ResoColDFs const& collisions, ResoTrackDFs const& tracks)
   {
-    if (doprocessMix || doprocessMixDF) LOG(fatal) << "Disable processMix() or processMixDF() first!";
+    if (doprocessMix || doprocessMixDF)
+      LOG(fatal) << "Disable processMix() or processMixDF() first!";
     LOGF(debug, "Event Mixing Started");
     BinningTypeEP binningPositions2{{cMixVtxBins, cMixMultBins, cMixEPAngle}, true};
     auto tracksTuple = std::make_tuple(tracks);
